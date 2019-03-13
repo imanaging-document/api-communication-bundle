@@ -1,5 +1,5 @@
 {
-    "name": "imanaging/api-communication-bundle",
+    "name": "imanaging-document/api-communication-bundle",
     "description": "Service de communication, par API, entre diverses applications",
     "type": "symfony-bundle",
     "license": "MIT",
