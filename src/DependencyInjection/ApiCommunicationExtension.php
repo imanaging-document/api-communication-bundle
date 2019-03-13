@@ -31,6 +31,12 @@ class ApiCommunicationExtension extends Extension
     $definition = $container->getDefinition('imanaging_api_communication.api_core_communication');
     $definition->setArgument(0, $config['core_api_url']);
     $definition->setArgument(1, $config['core_api_token']);
+
+    $definition = $container->getDefinition('imanaging_api_communication.api_zeus_communication');
+    $definition->setArgument(0, $config['zeus_api_url']);
+    $definition->setArgument(1, $config['zeus_api_login']);
+    $definition->setArgument(2, $config['zeus_api_password']);
+    $definition->setArgument(3, $config['client_traitement']);
   }
 
   public function getAlias()

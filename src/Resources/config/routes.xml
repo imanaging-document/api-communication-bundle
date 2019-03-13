@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing
+        https://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="api_core_communication" path="/core/" controller="imanaging_api_communication.api_core_communication_controller:index">
+        <!-- settings -->
+    </route>
+
+    <route id="api_zeus_communication" path="/zeus/" controller="imanaging_api_communication.api_zeus_communication_controller:index">
+        <!-- settings -->
+    </route>
+</routes>

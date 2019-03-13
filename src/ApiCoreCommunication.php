@@ -2,7 +2,7 @@
 
 namespace Imanaging\ApiCommunicationBundle;
 
-use App\Entity\RequestResult;
+use Imanaging\ApiCommunicationBundle\Entity\RequestResult;
 
 class ApiCoreCommunication extends ImanagingApiCommunication
 {
@@ -16,7 +16,7 @@ class ApiCoreCommunication extends ImanagingApiCommunication
    * @param $apiCoreUrl
    * @param $apiCoreToken
    */
-  public function __construct($apiCoreUrl, $apiCoreToken){
+  public function __construct($apiCoreUrl = "", $apiCoreToken = ""){
     $this->api_core_url = $apiCoreUrl;
     $this->api_core_token = $apiCoreToken;
     $this->mock_enable_on_dev_env = false;
@@ -129,6 +129,4 @@ class ApiCoreCommunication extends ImanagingApiCommunication
   {
     $this->mock_enable_on_dev_env = $mock_enable_on_dev_env;
   }
-
-
 }

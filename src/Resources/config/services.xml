@@ -7,7 +7,14 @@
     <services>
         <!-- Explicitly configure the service -->
         <service id="imanaging_api_communication.api_core_communication" class="Imanaging\ApiCommunicationBundle\ApiCoreCommunication" />
+        <service id="imanaging_api_communication.api_core_communication_controller" class="Imanaging\ApiCommunicationBundle\Controller\ApiCoreCommunicationController" public="true">
+            <argument type="service" id="imanaging_api_communication.api_core_communication" />
+        </service>
+
         <service id="imanaging_api_communication.api_zeus_communication" class="Imanaging\ApiCommunicationBundle\ApiZeusCommunication" />
+        <service id="imanaging_api_communication.api_zeus_communication_controller" class="Imanaging\ApiCommunicationBundle\Controller\ApiZeusCommunicationController" public="true">
+            <argument type="service" id="imanaging_api_communication.api_zeus_communication" />
+        </service>
 
         <service id="Imanaging\ApiCommunicationBundle\ApiCoreCommunication" alias="imanaging_api_communication.api_core_communication" />
         <service id="Imanaging\ApiCommunicationBundle\ApiZeusCommunication" alias="imanaging_api_communication.api_zeus_communication" />

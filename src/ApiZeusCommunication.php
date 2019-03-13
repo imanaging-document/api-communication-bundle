@@ -8,8 +8,7 @@
 
 namespace Imanaging\ApiCommunicationBundle;
 
-use App\Entity\RequestResult;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Imanaging\ApiCommunicationBundle\Entity\RequestResult;
 
 class ApiZeusCommunication extends ImanagingApiCommunication
 {
@@ -20,12 +19,16 @@ class ApiZeusCommunication extends ImanagingApiCommunication
   protected $mock_enable_on_dev_env;
 
   /**
+   * @param string $apiZeusUrl
+   * @param string $apiZeusLogin
+   * @param string $apiZeusPassword
+   * @param string $clientTraitement
    */
-  public function __construct(){
-    $this->client_traitement = getenv('CLIENT_TRAITEMENT');
-    $this->api_zeus_url = getenv('ZEUS_API_URL');
-    $this->api_zeus_login = getenv('ZEUS_API_LOGIN');
-    $this->api_zeus_password = getenv('ZEUS_API_PASSWORD');
+  public function __construct($apiZeusUrl = "", $apiZeusLogin = "", $apiZeusPassword = "", $clientTraitement = ""){
+    $this->api_zeus_url =$apiZeusUrl ;
+    $this->api_zeus_login = $apiZeusLogin;
+    $this->api_zeus_password = $apiZeusPassword;
+    $this->client_traitement = $clientTraitement;
     $this->mock_enable_on_dev_env = false;
   }
 
@@ -126,7 +129,4 @@ class ApiZeusCommunication extends ImanagingApiCommunication
   {
     return $this->client_traitement;
   }
-
-
-
 }
