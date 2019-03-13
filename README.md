@@ -57,7 +57,7 @@ Examples
 
 GET example :
 ```php
-$url = '/my-beautiful-get-url;
+$url = '/my-beautiful-get-url';
 $response = $this->apiZeusCommunication->sendGetRequest($url);
 
 if ($response->getHttpCode() === 200) {
@@ -68,7 +68,7 @@ if ($response->getHttpCode() === 200) {
 POST example :
 ```php
 $postData = array(
-  '...' => '...,
+  '...' => '...',
   'my_post_key' => $myPostValue,
   '...' => '...',
 );
