@@ -15,7 +15,7 @@ Configuration
 ----------------------------------
 
 You have to create a ```config/packages/imanaging_api_communication.yaml``` file:
-```console
+```yaml
 imanaging_api_communication:
     zeus_api_url: ~
     zeus_api_login: ~
@@ -28,14 +28,14 @@ imanaging_api_communication:
 Usage in services
 ----------------------------------
 Add a new argument to your service in your ```config/services.yaml``` file:
-```console
+```yaml
 login:
     class: App\Service\MyBeautifulService
     arguments: [..., '@api_zeus_communication', ...]
 ```
 
 Get the ApiZeusCommunication in your this way :
-```console
+```php
 private ...
 private $apiZeusCommunication;
 private ...
@@ -56,7 +56,7 @@ Examples
 ----------------------------------
 
 GET example :
-```console
+```php
 $url = '/my-beautiful-get-url;
 $response = $this->apiZeusCommunication->sendGetRequest($url);
 
@@ -66,7 +66,7 @@ if ($response->getHttpCode() === 200) {
 ```
 
 POST example :
-```console
+```php
 $postData = array(
   '...' => '...,
   'my_post_key' => $myPostValue,
