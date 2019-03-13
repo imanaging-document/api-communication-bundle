@@ -3,7 +3,7 @@ ApiCommunicationBundle
 
 This bundle allows different imanaging-document applications to communicate with each other.
 
-This bundle can't be used outside of an imanaging-document application.
+This bundle can't be used outside an imanaging-document application.
 
 Install the bundle with:
 
