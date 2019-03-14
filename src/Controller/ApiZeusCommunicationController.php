@@ -22,10 +22,13 @@ class ApiZeusCommunicationController extends AbstractController
 
   public function index()
   {
-    return $this->json([
-      'api_zeus_login' => $this->apiZeusCommunication->getApiZeusLogin(),
-      'api_zeus_password' => $this->apiZeusCommunication->getApiZeusPassword(),
-      'client_traitement' => $this->apiZeusCommunication->getClientTraitement()
+    $url = "/app/infos?login=".$this->apiZeusCommunication->getApiZeusLogin().'&password='.$this->apiZeusCommunication->getApiZeusPassword();
+    $result = $this->apiZeusCommunication->sendGetRequest($url);
+    $data = json_decode($result->getData());
+
+    return $this->render('@ApiCommunication/Zeus/testing_page.html.twig', [
+      'result' => $result,
+      'data' => $data
     ]);
   }
 }

@@ -1,0 +1,9 @@
+<div style="text-align: center;">
+  <h2>Page de test de connexion à l'API ZEUS</h2>
+
+  <h4>Résultat :</h4>
+  <p>Code HTTP : <b>{{ result.httpCode }}</b></p>
+  {% if result.httpCode == 200 %}
+    <p>Nombre de clients-traitements actifs / total : <b>{{ data.nb_client_traitement_actif }} / {{ data.nb_client_traitement }}</b></p>
+  {% endif %}
+</div>

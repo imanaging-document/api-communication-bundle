@@ -23,9 +23,14 @@ class ApiCoreCommunicationController extends AbstractController
 
   public function index()
   {
-    return $this->json([
-      'api_core_login' => $this->apiCoreCommunication->getApiCoreLogin(),
-      'api_core_token' => $this->apiCoreCommunication->getApiCoreToken()
+    $cryptedToken = hash('sha256', $this->apiCoreCommunication->getApiCoreToken());
+    $url = "/app/infos?token=".$cryptedToken;
+    $result = $this->apiCoreCommunication->sendGetRequest($url);
+    $data = json_decode($result->getData());
+
+    return $this->render('@ApiCommunication/Core/testing_page.html.twig', [
+      'result' => $result,
+      'data' => $data
     ]);
   }
 }

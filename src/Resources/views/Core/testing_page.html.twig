@@ -1,0 +1,11 @@
+<div style="text-align: center;">
+  <h2>Page de test de connexion à l'API CORE</h2>
+
+  <h4>Résultat :</h4>
+  <p>Code HTTP : <b>{{ result.httpCode }}</b></p>
+  {% if result.httpCode == 200 %}
+    <p>Client : <b>{{ data.client }}</b></p>
+    <p>Nombre de patrimoine : <b>{{ data.nb_patrimoine }}</b></p>
+    <p>Nombre de contrat acitf / nombre total : <b>{{ data.nb_contrat_actif }} / {{ data.nb_contrat_total }}</b></p>
+  {% endif %}
+</div>
