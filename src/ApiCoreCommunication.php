@@ -13,13 +13,15 @@ class ApiCoreCommunication extends ImanagingApiCommunication
   private $mock_enable_on_dev_env;
 
   /**
-   * @param $apiCoreUrl
-   * @param $apiCoreToken
+   * @param string $apiCoreUrl
+   * @param string $apiCoreToken
+   * @param string $coreMockDirectory
    */
-  public function __construct($apiCoreUrl = "", $apiCoreToken = ""){
+  public function __construct($apiCoreUrl = "", $apiCoreToken = "", $coreMockDirectory = ""){
     $this->api_core_url = $apiCoreUrl;
     $this->api_core_token = $apiCoreToken;
     $this->mock_enable_on_dev_env = false;
+    $this->mock_directory = $coreMockDirectory;
   }
 
   /**

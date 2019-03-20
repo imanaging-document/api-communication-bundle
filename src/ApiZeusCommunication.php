@@ -19,15 +19,19 @@ class ApiZeusCommunication extends ImanagingApiCommunication
   protected $mock_enable_on_dev_env;
 
   /**
+   * @param string $projectDir
    * @param string $apiZeusUrl
    * @param string $apiZeusLogin
    * @param string $apiZeusPassword
+   * @param string $mockDirectory
    * @param string $clientTraitement
    */
-  public function __construct($apiZeusUrl = "", $apiZeusLogin = "", $apiZeusPassword = "", $clientTraitement = ""){
+  public function __construct($projectDir = "", $apiZeusUrl = "", $apiZeusLogin = "", $apiZeusPassword = "", $mockDirectory = "", $clientTraitement = ""){
+    $this->projectDir =$projectDir ;
     $this->api_zeus_url =$apiZeusUrl ;
     $this->api_zeus_login = $apiZeusLogin;
     $this->api_zeus_password = $apiZeusPassword;
+    $this->mockDir = $mockDirectory;
     $this->client_traitement = $clientTraitement;
     $this->mock_enable_on_dev_env = false;
   }

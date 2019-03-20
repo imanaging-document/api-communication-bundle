@@ -12,6 +12,9 @@ use Symfony\Component\Yaml\Yaml;
 
 class ImanagingApiCommunication
 {
+  protected $projectDir;
+  protected $mockDir;
+
   /**
    * @param $globalUrl
    * @param $url
@@ -56,22 +59,14 @@ class ImanagingApiCommunication
       $fileName = md5(json_encode($url));
     }
 
-    $ressourcesDir = $_SERVER["DOCUMENT_ROOT"] . "/../src/Ressources/";
-    $fileDirectory = $ressourcesDir . "tests/";
-    $file = $fileDirectory . $fileName . ".yaml";
+    Utils::createRecursiveFolder($this->projectDir, $this->mockDir);
+    $filePath = $this->projectDir . $this->mockDir . $fileName . ".yaml";
 
-    if (!is_dir($ressourcesDir)) {
-      mkdir($ressourcesDir);
-    }
-    if (!is_dir($fileDirectory)) {
-      mkdir($fileDirectory);
-    }
-
-    if (file_exists($file)) {
-      $data = Yaml::parseFile($file);
+    if (file_exists($filePath)) {
+      $data = Yaml::parseFile($filePath);
     } else {
       $data = Yaml::dump(array('http_code' => '200', 'response' => 'default_response | file : ' . $fileName));
-      file_put_contents($file, $data);
+      file_put_contents($filePath, $data);
     }
 
     return $data;
