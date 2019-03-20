@@ -17,12 +17,15 @@ Configuration
 You have to create a ```config/packages/imanaging_api_communication.yaml``` file:
 ```yaml
 imanaging_api_communication:
+    project_dir: '%kernel.project_dir%'
     zeus_api_url: ~
     zeus_api_login: ~
     zeus_api_password: ~
+    zeus_mock_dir: ~
     client_traitement: ~
     core_api_url: ~
     core_api_token: ~
+    core_mock_dir: ~
 ```
 
 Usage in services
