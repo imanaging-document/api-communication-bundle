@@ -34,8 +34,8 @@ class ImanagingApiCommunication
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
       } else {
         curl_setopt($ch, CURLOPT_URL, $globalUrl);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
       }
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
       // On set le timeout
       curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
