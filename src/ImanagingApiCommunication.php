@@ -22,9 +22,10 @@ class ImanagingApiCommunication
    * @param null $postData
    * @param bool $enabledDevMode
    * @param int $timeout
+   * @param null $postHttpHeader
    * @return array
    */
-  protected function sendRequest($globalUrl, $url, $postMode, $postData = null, $enabledDevMode = false, $timeout = 10) {
+  protected function sendRequest($globalUrl, $url, $postMode, $postData = null, $enabledDevMode = false, $timeout = 10, $postHttpHeader = null) {
     // on va faire notre check du mode test ici pour faire le mock de l'API
     $environnement = getenv('APP_ENV');
     if (strcmp($environnement , "test") != 0 && ($enabledDevMode == false || strcmp($environnement , "dev") != 0)) {
@@ -32,6 +33,9 @@ class ImanagingApiCommunication
       if ($postMode) {
         $ch = curl_init($globalUrl);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+        if (!is_null($postHttpHeader)){
+          curl_setopt($ch, CURLOPT_HTTPHEADER, $postHttpHeader);
+        }
       } else {
         curl_setopt($ch, CURLOPT_URL, $globalUrl);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
