@@ -46,8 +46,13 @@ class ImanagingApiCommunication
 
       $resultRequest = array(
         'response' => curl_exec($ch),
-        'http_code' => curl_getinfo($ch, CURLINFO_HTTP_CODE)
+        'http_code' => curl_getinfo($ch, CURLINFO_HTTP_CODE),
+        'curl_error' => ''
       );
+      if($errno = curl_errno($ch)) {
+        $error_message = curl_strerror($errno);
+        $resultRequest['curl_error'] = "cURL error ({$errno}):\n {$error_message}";
+      }
       curl_close($ch);
     } else {
       // on va chercher le fichier texte correspondant
