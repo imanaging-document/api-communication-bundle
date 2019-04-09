@@ -74,7 +74,7 @@ class ImanagingApiCommunication
     if (file_exists($filePath)) {
       $data = Yaml::parseFile($filePath);
     } else {
-      $data = Yaml::dump(array('http_code' => '200', 'response' => 'default_response | file : ' . $fileName));
+      $data = Yaml::dump(array('http_code' => '200', 'response' => 'default_response | file : ' . $fileName, 'curl_error' => ''));
       file_put_contents($filePath, $data);
     }
 
