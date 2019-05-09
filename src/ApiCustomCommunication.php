@@ -23,9 +23,9 @@ class ApiCustomCommunication extends ImanagingApiCommunication
    */
   public function __construct($apiUrl = "", $apiLogin = "", $apiPassword = "", $apiToken = "", $projectDir = "", $coreMockDirectory = ""){
     $this->api_url = $apiUrl;
-    $this->api_token = $apiLogin;
-    $this->api_login = $apiPassword;
-    $this->api_password = $apiToken;
+    $this->api_login = $apiLogin;
+    $this->api_password = $apiPassword;
+    $this->api_token = $apiToken;
     $this->mock_directory = $coreMockDirectory;
     $this->projectDir = $projectDir;
     $this->mock_enable_on_dev_env = false;
