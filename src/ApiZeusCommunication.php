@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: PC14
- * Date: 28/06/2017
- * Time: 12:45
- */
 
 namespace Imanaging\ApiCommunicationBundle;
 

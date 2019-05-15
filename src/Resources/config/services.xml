@@ -16,7 +16,13 @@
             <argument type="service" id="imanaging_api_communication.api_zeus_communication" />
         </service>
 
+        <service id="imanaging_api_communication.api_demat_communication" class="Imanaging\ApiCommunicationBundle\ApiDematCommunication" />
+        <service id="imanaging_api_communication.api_demat_communication_controller" class="Imanaging\ApiCommunicationBundle\Controller\ApiDematCommunicationController" public="true">
+            <argument type="service" id="imanaging_api_communication.api_demat_communication" />
+        </service>
+
         <service id="Imanaging\ApiCommunicationBundle\ApiCoreCommunication" alias="imanaging_api_communication.api_core_communication" />
         <service id="Imanaging\ApiCommunicationBundle\ApiZeusCommunication" alias="imanaging_api_communication.api_zeus_communication" />
+        <service id="Imanaging\ApiCommunicationBundle\ApiDematCommunication" alias="imanaging_api_communication.api_demat_communication" />
     </services>
 </container>

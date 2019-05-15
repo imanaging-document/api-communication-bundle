@@ -8,6 +8,7 @@
 
 namespace Imanaging\ApiCommunicationBundle\DependencyInjection;
 
+use Exception;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -18,7 +19,7 @@ class ApiCommunicationExtension extends Extension
   /**
    * @param array $configs
    * @param ContainerBuilder $container
-   * @throws \Exception
+   * @throws Exception
    */
   public function load(array $configs, ContainerBuilder $container)
   {
@@ -41,6 +42,13 @@ class ApiCommunicationExtension extends Extension
     $definition->setArgument(3, $config['zeus_api_password']);
     $definition->setArgument(4, $config['zeus_mock_dir']);
     $definition->setArgument(5, $config['client_traitement']);
+
+    $definition = $container->getDefinition('imanaging_api_communication.api_demat_communication');
+    $definition->setArgument(0, $config['project_dir']);
+    $definition->setArgument(1, $config['demat_api_url']);
+    $definition->setArgument(2, $config['demat_api_login']);
+    $definition->setArgument(3, $config['demat_api_password']);
+    $definition->setArgument(4, $config['demat_mock_dir']);
   }
 
   public function getAlias()
