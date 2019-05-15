@@ -3,4 +3,7 @@
 
   <h4>Résultat :</h4>
   <p>Code HTTP : <b>{{ result.httpCode }}</b></p>
+  {% if result.httpCode == 200 %}
+    <b>{{ result.data }}</b>
+  {% endif %}
 </div>
