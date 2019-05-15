@@ -32,7 +32,7 @@ class Configuration implements ConfigurationInterface
         ->variableNode('demat_api_url')->defaultValue('%env(API_DEMAT_URL)%')->end()
         ->variableNode('demat_api_login')->defaultValue('%env(API_DEMAT_LOGIN)%')->end()
         ->variableNode('demat_api_password')->defaultValue('%env(API_DEMAT_PASSWORD)%')->end()
-        ->variableNode('core_mock_dir')->defaultValue('')->end()
+        ->variableNode('demat_mock_dir')->defaultValue('')->end()
       ->end()
     ;
     return $treeBuilder;
