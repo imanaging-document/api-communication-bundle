@@ -11,4 +11,8 @@
     <route id="api_zeus_communication" path="/zeus/" controller="imanaging_api_communication.api_zeus_communication_controller:index">
         <!-- settings -->
     </route>
+
+    <route id="api_demat_communication" path="/demat/" controller="imanaging_api_communication.api_demat_communication_controller:index">
+        <!-- settings -->
+    </route>
 </routes>
