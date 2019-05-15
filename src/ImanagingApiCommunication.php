@@ -14,6 +14,7 @@ class ImanagingApiCommunication
 {
   protected $projectDir;
   protected $mockDir;
+  protected $timeout;
 
   /**
    * @param $globalUrl
@@ -79,5 +80,9 @@ class ImanagingApiCommunication
     }
 
     return $data;
+  }
+
+  public function setTimeout($timeout = 10) {
+    $this->timeout = $timeout;
   }
 }

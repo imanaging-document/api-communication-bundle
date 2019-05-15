@@ -63,7 +63,7 @@ class ApiZeusCommunication extends ImanagingApiCommunication
 
       $requestResult->setGlobalUrl($globalUrl);
 
-      $result = $this->sendRequest($globalUrl, $url, $postMode, $postData, $this->mock_enable_on_dev_env);
+      $result = $this->sendRequest($globalUrl, $url, $postMode, $postData, $this->mock_enable_on_dev_env, $this->timeout);
 
       $requestResult->setHttpCode($result['http_code']);
       $requestResult->setData($result['response']);
