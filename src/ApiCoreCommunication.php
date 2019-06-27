@@ -6,10 +6,14 @@ use Imanaging\ApiCommunicationBundle\Entity\RequestResult;
 
 class ApiCoreCommunication extends ImanagingApiCommunication
 {
+  private $api_core_type;
   private $api_core_url;
   private $api_core_login;
   private $api_core_password;
   private $api_core_token;
+  private $api_core_client_traitement;
+  private $api_core_annee;
+  private $api_core_application_id;
   private $mock_enable_on_dev_env;
   private $mock_directory;
 
@@ -19,10 +23,14 @@ class ApiCoreCommunication extends ImanagingApiCommunication
    * @param string $apiCoreToken
    * @param string $coreMockDirectory
    */
-  public function __construct($projectDir = "", $apiCoreUrl = "", $apiCoreToken = "", $coreMockDirectory = ""){
+  public function __construct($projectDir = "", $apiCoreType = "", $apiCoreUrl = "", $apiCoreToken = "", $apiCoreClientTraitement = "", $apiCoreAnnee = "", $coreMockDirectory = ""){
+    $this->api_core_type = $apiCoreType;
     $this->api_core_url = $apiCoreUrl;
     $this->api_core_token = $apiCoreToken;
+    $this->api_core_client_traitement = $apiCoreClientTraitement;
+    $this->api_core_annee = $apiCoreAnnee;
     $this->mock_enable_on_dev_env = false;
+    $this->api_core_application_id = null;
     $this->mock_directory = $coreMockDirectory;
     $this->projectDir = $projectDir;
   }
@@ -133,5 +141,36 @@ class ApiCoreCommunication extends ImanagingApiCommunication
   public function setMockEnableOnDevEnv(bool $mock_enable_on_dev_env): void
   {
     $this->mock_enable_on_dev_env = $mock_enable_on_dev_env;
+  }
+
+  public function getTypeApplication() {
+    return $this->api_core_type;
+  }
+
+  public function getApiCoreApplicationId() {
+    if (is_null($this->api_core_application_id)) {
+      $this->initApplicationId();
+    }
+    return $this->api_core_application_id;
+  }
+
+  private function initApplicationId() {
+    if ($this->api_core_type == "attestation") {
+      $url = '/application-attestation?token=' . $this->api_core_token . '&client_traitement=' . $this->api_core_client_traitement;
+    } elseif ($this->api_core_type == "enquete") {
+      $url = '/application-enquete?token=' . $this->api_core_token . '&client_traitement=' . $this->api_core_client_traitement . '&annee=' . $this->api_core_annee;
+    } else {
+      return false;
+    }
+
+    $response = $this->sendGetRequest($url);
+    if ($response->getHttpCode() == '200') {
+      $application = json_decode($response->getData());
+      $this->api_core_application_id = $application->id;
+
+      return true;
+    } else {
+      return false;
+    }
   }
 }

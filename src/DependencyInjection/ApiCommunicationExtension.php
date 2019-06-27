@@ -31,9 +31,12 @@ class ApiCommunicationExtension extends Extension
 
     $definition = $container->getDefinition('imanaging_api_communication.api_core_communication');
     $definition->setArgument(0, $config['project_dir']);
-    $definition->setArgument(1, $config['core_api_url']);
-    $definition->setArgument(2, $config['core_api_token']);
-    $definition->setArgument(3, $config['core_mock_dir']);
+    $definition->setArgument(1, $config['core_api_type']);
+    $definition->setArgument(2, $config['core_api_url']);
+    $definition->setArgument(3, $config['core_api_token']);
+    $definition->setArgument(4, $config['core_api_client_traitement']);
+    $definition->setArgument(5, $config['core_api_annee']);
+    $definition->setArgument(6, $config['core_mock_dir']);
 
     $definition = $container->getDefinition('imanaging_api_communication.api_zeus_communication');
     $definition->setArgument(0, $config['project_dir']);
