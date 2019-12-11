@@ -156,9 +156,11 @@ class ApiCoreCommunication extends ImanagingApiCommunication
 
   private function initApplicationId() {
     if ($this->api_core_type == "attestation") {
-      $url = '/application-attestation?token=' . $this->api_core_token . '&client_traitement=' . $this->api_core_client_traitement;
+      $url = '/application-attestation?token=' . hash('sha256', $this->api_core_token) . '&client_traitement=' . $this->api_core_client_traitement;
     } elseif ($this->api_core_type == "enquete") {
-      $url = '/application-enquete?token=' . $this->api_core_token . '&client_traitement=' . $this->api_core_client_traitement . '&annee=' . $this->api_core_annee;
+      $url = '/application-enquete?token=' . hash('sha256', $this->api_core_token) . '&client_traitement=' . $this->api_core_client_traitement . '&annee=' . $this->api_core_annee;
+    } elseif ($this->api_core_type == "hqmc") {
+      $url = '/application-hqmc?token=' . hash('sha256', $this->api_core_token) . '&client_traitement=' . $this->api_core_client_traitement;
     } else {
       return false;
     }
