@@ -20,11 +20,12 @@ class ApiZeusCommunication extends ImanagingApiCommunication
    * @param string $mockDirectory
    * @param string $clientTraitement
    */
-  public function __construct($projectDir = "", $apiZeusUrl = "", $apiZeusLogin = "", $apiZeusPassword = "", $mockDirectory = "", $clientTraitement = ""){
+  public function __construct($projectDir = "", $apiZeusUrl = "", $apiZeusLogin = "", $apiZeusPassword = "", $apiZeusToken = "", $mockDirectory = "", $clientTraitement = ""){
     $this->projectDir =$projectDir ;
     $this->api_zeus_url =$apiZeusUrl ;
     $this->api_zeus_login = $apiZeusLogin;
     $this->api_zeus_password = $apiZeusPassword;
+    $this->api_zeus_token = $apiZeusToken;
     $this->mockDir = $mockDirectory;
     $this->client_traitement = $clientTraitement;
     $this->mock_enable_on_dev_env = false;
@@ -102,6 +103,22 @@ class ApiZeusCommunication extends ImanagingApiCommunication
   public function setApiZeusPassword($api_zeus_password): void
   {
     $this->api_zeus_password = $api_zeus_password;
+  }
+
+  /**
+   * @return mixed|string
+   */
+  public function getApiZeusToken(): string
+  {
+    return hash('sha256', $this->api_zeus_token);
+  }
+
+  /**
+   * @param mixed|string $api_zeus_token
+   */
+  public function setApiZeusToken(string $api_zeus_token): void
+  {
+    $this->api_zeus_token = $api_zeus_token;
   }
 
   /**
