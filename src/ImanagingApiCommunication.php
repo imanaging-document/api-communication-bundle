@@ -50,7 +50,8 @@ class ImanagingApiCommunication
         'http_code' => curl_getinfo($ch, CURLINFO_HTTP_CODE),
         'curl_error' => ''
       );
-      if($errno = curl_errno($ch)) {
+      $errno = curl_errno($ch);
+      if($errno != 0) {
         $error_message = curl_strerror($errno);
         $resultRequest['curl_error'] = "cURL error ({$errno}):\n {$error_message}";
       }
