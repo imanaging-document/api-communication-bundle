@@ -69,6 +69,10 @@ class ApiCustomCommunication extends ImanagingApiCommunication
 
       $requestResult->setHttpCode($result['http_code']);
       $requestResult->setData($result['response']);
+      if ($result['curl_error'] != '') {
+        $requestResult->setError(true);
+        $requestResult->setLibelleError($result['curl_error']);
+      }
     }
 
     return $requestResult;
