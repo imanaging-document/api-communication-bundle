@@ -45,7 +45,6 @@ class ApiCustomCommunication extends ImanagingApiCommunication
    * @return RequestResult
    */
   public function sendGetRequest($url) {
-    if ($this->api_url)
     return $this->sendRequestCustom($url, false);
   }
 
