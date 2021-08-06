@@ -46,6 +46,13 @@ class ImanagingApiCommunication
       // On set le timeout
       curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
 
+      // Gestion d'un proxy
+      if (getenv('PROXY') == 'true') {
+        curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
+        curl_setopt($ch, CURLOPT_PROXY, getenv('PROXY_URL'));
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+      }
+
       $resultRequest = array(
         'response' => curl_exec($ch),
         'http_code' => curl_getinfo($ch, CURLINFO_HTTP_CODE),
