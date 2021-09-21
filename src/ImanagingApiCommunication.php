@@ -35,23 +35,18 @@ class ImanagingApiCommunication
         $ch = curl_init($globalUrl);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
         if (!is_null($postHttpHeader)){
+          $postHttpHeader[] = 'Expect:';
           curl_setopt($ch, CURLOPT_HTTPHEADER, $postHttpHeader);
+        } else {
+          curl_setopt($ch, CURLOPT_HTTPHEADER, array("Expect:"));
         }
       } else {
         curl_setopt($ch, CURLOPT_URL, $globalUrl);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json', 'Expect:'));
       }
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array("Expect:"));
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
       // On set le timeout
       curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
-
-      // Gestion d'un proxy
-      if (getenv('PROXY') == 'true') {
-        curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
-        curl_setopt($ch, CURLOPT_PROXY, getenv('PROXY_URL'));
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-      }
 
       $resultRequest = array(
         'response' => curl_exec($ch),
