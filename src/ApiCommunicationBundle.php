@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ApiCommunicationBundle extends Bundle
 {
-  public function getContainerExtension()
+  public function getContainerExtension() : ?ApiCommunicationExtension
   {
     if (null === $this->extension){
       $this->extension = new ApiCommunicationExtension();
