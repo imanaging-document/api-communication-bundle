@@ -55,7 +55,7 @@ class ApiCommunicationExtension extends Extension
     $definition->setArgument(4, $config['demat_mock_dir']);
   }
 
-  public function getAlias()
+  public function getAlias() : string
   {
     return 'imanaging_api_communication';
   }
