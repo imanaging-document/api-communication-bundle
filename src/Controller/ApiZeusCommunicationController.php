@@ -10,6 +10,7 @@ namespace Imanaging\ApiCommunicationBundle\Controller;
 
 use Imanaging\ApiCommunicationBundle\ApiZeusCommunication;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 class ApiZeusCommunicationController extends AbstractController
 {
@@ -20,7 +21,7 @@ class ApiZeusCommunicationController extends AbstractController
     $this->apiZeusCommunication = $apiZeusCommunication;
   }
 
-  public function index()
+  public function index(): Response
   {
     $url = "/app/infos?login=".$this->apiZeusCommunication->getApiZeusLogin().'&password='.$this->apiZeusCommunication->getApiZeusPassword();
     $result = $this->apiZeusCommunication->sendGetRequest($url);

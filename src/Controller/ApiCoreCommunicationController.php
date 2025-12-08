@@ -10,6 +10,7 @@ namespace Imanaging\ApiCommunicationBundle\Controller;
 
 use Imanaging\ApiCommunicationBundle\ApiCoreCommunication;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class ApiCoreCommunicationController extends AbstractController
@@ -21,7 +22,7 @@ class ApiCoreCommunicationController extends AbstractController
     $this->apiCoreCommunication = $apiCoreCommunication;
   }
 
-  public function index()
+  public function index(): Response
   {
     $cryptedToken = hash('sha256', $this->apiCoreCommunication->getApiCoreToken());
     $url = "/app/infos?token=".$cryptedToken;

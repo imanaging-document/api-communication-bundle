@@ -10,6 +10,7 @@ namespace Imanaging\ApiCommunicationBundle\Controller;
 
 use Imanaging\ApiCommunicationBundle\ApiDematCommunication;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 class ApiDematCommunicationController extends AbstractController
 {
@@ -20,7 +21,7 @@ class ApiDematCommunicationController extends AbstractController
     $this->apiDematCommunication = $apiDematCommunication;
   }
 
-  public function index()
+  public function index(): Response
   {
     $url = "/app/infos?login=".$this->apiDematCommunication->getApiDematLogin().'&password='.$this->apiDematCommunication->getApiDematPassword();
     $result = $this->apiDematCommunication->sendGetRequest($url);
