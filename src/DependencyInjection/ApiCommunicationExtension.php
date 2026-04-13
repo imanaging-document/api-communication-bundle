@@ -1,14 +1,7 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: PC14
- * Date: 11/03/2019
- * Time: 14:52
- */
+declare(strict_types=1);
 
 namespace Imanaging\ApiCommunicationBundle\DependencyInjection;
 
-use Exception;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -19,9 +12,9 @@ class ApiCommunicationExtension extends Extension
   /**
    * @param array $configs
    * @param ContainerBuilder $container
-   * @throws Exception
+   * @throws \Exception
    */
-  public function load(array $configs, ContainerBuilder $container)
+  public function load(array $configs, ContainerBuilder $container): void
   {
     $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
     $loader->load('services.xml');
@@ -30,32 +23,38 @@ class ApiCommunicationExtension extends Extension
     $config = $this->processConfiguration($configuration, $configs);
 
     $definition = $container->getDefinition('imanaging_api_communication.api_core_communication');
-    $definition->setArgument(0, $config['project_dir']);
-    $definition->setArgument(1, $config['core_api_type']);
-    $definition->setArgument(2, $config['core_api_url']);
-    $definition->setArgument(3, $config['core_api_token']);
-    $definition->setArgument(4, $config['core_api_client_traitement']);
-    $definition->setArgument(5, $config['core_api_annee']);
-    $definition->setArgument(6, $config['core_mock_dir']);
+    $definition->setArguments([
+      $config['project_dir'],
+      $config['core_api_type'],
+      $config['core_api_url'],
+      $config['core_api_token'],
+      $config['core_api_client_traitement'],
+      $config['core_api_annee'],
+      $config['core_mock_dir'],
+    ]);
 
     $definition = $container->getDefinition('imanaging_api_communication.api_zeus_communication');
-    $definition->setArgument(0, $config['project_dir']);
-    $definition->setArgument(1, $config['zeus_api_url']);
-    $definition->setArgument(2, $config['zeus_api_login']);
-    $definition->setArgument(3, $config['zeus_api_password']);
-    $definition->setArgument(4, $config['zeus_api_token']);
-    $definition->setArgument(5, $config['zeus_mock_dir']);
-    $definition->setArgument(6, $config['client_traitement']);
+    $definition->setArguments([
+      $config['project_dir'],
+      $config['zeus_api_url'],
+      $config['zeus_api_login'],
+      $config['zeus_api_password'],
+      $config['zeus_api_token'],
+      $config['zeus_mock_dir'],
+      $config['client_traitement'],
+    ]);
 
     $definition = $container->getDefinition('imanaging_api_communication.api_demat_communication');
-    $definition->setArgument(0, $config['project_dir']);
-    $definition->setArgument(1, $config['demat_api_url']);
-    $definition->setArgument(2, $config['demat_api_login']);
-    $definition->setArgument(3, $config['demat_api_password']);
-    $definition->setArgument(4, $config['demat_mock_dir']);
+    $definition->setArguments([
+      $config['project_dir'],
+      $config['demat_api_url'],
+      $config['demat_api_login'],
+      $config['demat_api_password'],
+      $config['demat_mock_dir'],
+    ]);
   }
 
-  public function getAlias() : string
+  public function getAlias(): string
   {
     return 'imanaging_api_communication';
   }

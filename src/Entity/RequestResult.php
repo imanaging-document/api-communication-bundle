@@ -1,136 +1,89 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: antonin
- * Date: 06/07/2018
- * Time: 09:13
- */
+declare(strict_types=1);
 
 namespace Imanaging\ApiCommunicationBundle\Entity;
 
 class RequestResult
 {
-  private $httpCode;
-  private $data;
-  private $error;
-  private $libelleError;
-  private $url;
-  private $postMode;
-  private $postData;
-  private $globalUrl;
-
-  public function __construct($url, $postMode, $postData)
-  {
-    $this->httpCode = null;
-    $this->data = null;
-    $this->error = false;
-    $this->libelleError = null;
-    $this->url = $url;
-    $this->postMode = $postMode;
-    $this->postData = $postData;
-    $this->globalUrl = null;
-  }
+  private ?string $httpCode = null;
+  private ?string $data = null;
+  private bool $error = false;
+  private ?string $libelleError = null;
+  private ?string $globalUrl = null;
 
   /**
-   * @return null
+   * @param array|null $postData
    */
-  public function getHttpCode()
+  public function __construct(
+    private string $url,
+    private bool $postMode,
+    private ?array $postData
+  ) {
+  }
+
+  public function getHttpCode(): ?string
   {
     return $this->httpCode;
   }
 
-  /**
-   * @param null $httpCode
-   */
-  public function setHttpCode($httpCode): void
+  public function setHttpCode(?string $httpCode): void
   {
     $this->httpCode = $httpCode;
   }
 
-  /**
-   * @return null
-   */
-  public function getData()
+  public function getData(): ?string
   {
     return $this->data;
   }
 
-  /**
-   * @param null $data
-   */
-  public function setData($data): void
+  public function setData(?string $data): void
   {
     $this->data = $data;
   }
 
-  /**
-   * @return bool
-   */
   public function isError(): bool
   {
     return $this->error;
   }
 
-  /**
-   * @param bool $error
-   */
   public function setError(bool $error): void
   {
     $this->error = $error;
   }
 
-  /**
-   * @return null
-   */
-  public function getLibelleError()
+  public function getLibelleError(): ?string
   {
     return $this->libelleError;
   }
 
-  /**
-   * @param null $libelleError
-   */
-  public function setLibelleError($libelleError): void
+  public function setLibelleError(?string $libelleError): void
   {
     $this->libelleError = $libelleError;
   }
 
-  /**
-   * @return null
-   */
-  public function getUrl()
+  public function getUrl(): string
   {
     return $this->url;
   }
 
   /**
-   * @return null
+   * @return array|null
    */
-  public function getPostData()
+  public function getPostData(): ?array
   {
     return $this->postData;
   }
 
-  /**
-   * @return bool
-   */
   public function isPostMode(): bool
   {
     return $this->postMode;
   }
 
-  /**
-   * @return null
-   */
-  public function getGlobalUrl()
+  public function getGlobalUrl(): ?string
   {
     return $this->globalUrl;
   }
 
-  /**
-   * @param null $globalUrl
-   */
-  public function setGlobalUrl($globalUrl): void
+  public function setGlobalUrl(?string $globalUrl): void
   {
     $this->globalUrl = $globalUrl;
   }

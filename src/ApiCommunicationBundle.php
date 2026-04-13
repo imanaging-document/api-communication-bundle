@@ -1,26 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: PC14
- * Date: 11/03/2019
- * Time: 14:49
- */
+
+declare(strict_types=1);
 
 namespace Imanaging\ApiCommunicationBundle;
 
-
 use Imanaging\ApiCommunicationBundle\DependencyInjection\ApiCommunicationExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
 class ApiCommunicationBundle extends Bundle
 {
-  public function getContainerExtension() : ?ApiCommunicationExtension
+  public function getContainerExtension(): ?ExtensionInterface
   {
-    if (null === $this->extension){
+    if (null === $this->extension) {
       $this->extension = new ApiCommunicationExtension();
     }
 
     return $this->extension;
   }
-
 }

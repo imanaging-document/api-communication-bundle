@@ -1,4 +1,4 @@
-<?php
+declare(strict_types=1);
 
 namespace Imanaging\ApiCommunicationBundle;
 
@@ -6,55 +6,30 @@ use Imanaging\ApiCommunicationBundle\Entity\RequestResult;
 
 class ApiCustomCommunication extends ImanagingApiCommunication
 {
-  private $api_url;
-  private $api_token;
-  private $api_login;
-  private $api_password;
-  private $mock_enable_on_dev_env;
-  private $mock_directory;
+  private bool $mock_enable_on_dev_env = false;
 
-  /**
-   * @param string $apiUrl
-   * @param string $apiLogin
-   * @param string $apiPassword
-   * @param string $apiToken
-   * @param string $projectDir
-   * @param string $coreMockDirectory
-   */
-  public function __construct($apiUrl = "", $apiLogin = "", $apiPassword = "", $apiToken = "", $projectDir = "", $coreMockDirectory = ""){
-    $this->api_url = $apiUrl;
-    $this->api_login = $apiLogin;
-    $this->api_password = $apiPassword;
-    $this->api_token = $apiToken;
-    $this->mock_directory = $coreMockDirectory;
+  public function __construct(
+    private string $api_url = "",
+    private string $api_login = "",
+    private string $api_password = "",
+    private string $api_token = "",
+    string $projectDir = "",
+    ?string $coreMockDirectory = ""
+  ) {
     $this->projectDir = $projectDir;
+    $this->mockDir = $coreMockDirectory;
     $this->mock_enable_on_dev_env = false;
   }
 
-  /**
-   * @param $url
-   * @param $postData
-   * @return RequestResult
-   */
-  public function sendPostRequest($url, $postData) {
+  public function sendPostRequest(string $url, ?array $postData): RequestResult {
       return $this->sendRequestCustom($url, true, $postData);
   }
 
-  /**
-   * @param $url
-   * @return RequestResult
-   */
-  public function sendGetRequest($url) {
+  public function sendGetRequest(string $url): RequestResult {
     return $this->sendRequestCustom($url, false);
   }
 
-  /**
-   * @param $url
-   * @param $postMode
-   * @param null $postData
-   * @return RequestResult
-   */
-  private function sendRequestCustom($url, $postMode, $postData = null) {
+  private function sendRequestCustom(string $url, bool $postMode, ?array $postData = null): RequestResult {
     $requestResult = new RequestResult($url, $postMode, $postData);
 
     // si pas d'erreur, on continue
@@ -66,156 +41,102 @@ class ApiCustomCommunication extends ImanagingApiCommunication
 
       $result = $this->sendRequest($globalUrl, $url, $postMode, $postData, $this->mock_enable_on_dev_env, $this->timeout);
 
-      $requestResult->setHttpCode($result['http_code']);
-      $requestResult->setData($result['response']);
+      $requestResult->setHttpCode((string)$result['http_code']);
+      $requestResult->setData((string)$result['response']);
       if ($result['curl_error'] != '') {
         $requestResult->setError(true);
-        $requestResult->setLibelleError($result['curl_error']);
+        $requestResult->setLibelleError((string)$result['curl_error']);
       }
     }
 
     return $requestResult;
   }
 
-  /**
-   * @return string
-   */
   public function getProjectDir(): string
   {
     return $this->projectDir;
   }
 
-  /**
-   * @param string $projectDir
-   */
   public function setProjectDir(string $projectDir): void
   {
     $this->projectDir = $projectDir;
   }
 
-  /**
-   * @return null
-   */
-  public function getApiUrl()
+  public function getApiUrl(): string
   {
     return $this->api_url;
   }
 
-  /**
-   * @param null $api_url
-   */
-  public function setApiUrl($api_url): void
+  public function setApiUrl(string $api_url): void
   {
     $this->api_url = $api_url;
   }
 
-  /**
-   * @return null
-   */
-  public function getApiToken()
+  public function getApiToken(): string
   {
     return $this->api_token;
   }
 
-  /**
-   * @param null $api_token
-   */
-  public function setApiToken($api_token): void
+  public function setApiToken(string $api_token): void
   {
     $this->api_token = $api_token;
   }
 
-  /**
-   * @return null
-   */
-  public function getApiLogin()
+  public function getApiLogin(): string
   {
     return $this->api_login;
   }
 
-  /**
-   * @param null $api_login
-   */
-  public function setApiLogin($api_login): void
+  public function setApiLogin(string $api_login): void
   {
     $this->api_login = $api_login;
   }
 
-  /**
-   * @return null
-   */
-  public function getApiPassword()
+  public function getApiPassword(): string
   {
     return $this->api_password;
   }
 
-  /**
-   * @param null $api_password
-   */
-  public function setApiPassword($api_password): void
+  public function setApiPassword(string $api_password): void
   {
     $this->api_password = $api_password;
   }
 
-  /**
-   * @return string
-   */
   public function getMockDirectory(): string
   {
-    return $this->mock_directory;
+    return (string)$this->mockDir;
   }
 
-  /**
-   * @param string $mock_directory
-   */
   public function setMockDirectory(string $mock_directory): void
   {
-    $this->mock_directory = $mock_directory;
+    $this->mockDir = $mock_directory;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getMockDir()
+  public function getMockDir(): ?string
   {
     return $this->mockDir;
   }
 
-  /**
-   * @param mixed $mockDir
-   */
-  public function setMockDir($mockDir): void
+  public function setMockDir(?string $mockDir): void
   {
     $this->mockDir = $mockDir;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getTimeout()
+  public function getTimeout(): int
   {
     return $this->timeout;
   }
 
-  /**
-   * @param mixed $timeout
-   */
-  public function setTimeout($timeout = 10): void
+  public function setTimeout(int $timeout = 10): void
   {
     $this->timeout = $timeout;
   }
 
-  /**
-   * @return bool
-   */
   public function isMockEnableOnDevEnv(): bool
   {
     return $this->mock_enable_on_dev_env;
   }
 
-  /**
-   * @param bool $mock_enable_on_dev_env
-   */
   public function setMockEnableOnDevEnv(bool $mock_enable_on_dev_env): void
   {
     $this->mock_enable_on_dev_env = $mock_enable_on_dev_env;

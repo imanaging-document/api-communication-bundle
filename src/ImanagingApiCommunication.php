@@ -1,10 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Antonin
- * Date: 29/07/2018
- * Time: 19:51
- */
+declare(strict_types=1);
 
 namespace Imanaging\ApiCommunicationBundle;
 
@@ -12,24 +6,19 @@ use Symfony\Component\Yaml\Yaml;
 
 class ImanagingApiCommunication
 {
-  protected $projectDir;
-  protected $mockDir;
-  protected $timeout;
+  protected string $projectDir;
+  protected ?string $mockDir = null;
+  protected int $timeout = 10;
 
   /**
-   * @param $globalUrl
-   * @param $url
-   * @param $postMode
-   * @param null $postData
-   * @param bool $enabledDevMode
-   * @param int $timeout
-   * @param null $postHttpHeader
-   * @return array
+   * @param array|null $postData
+   * @param array|null $postHttpHeader
+   * @return array<string, mixed>
    */
-  protected function sendRequest($globalUrl, $url, $postMode, $postData = null, $enabledDevMode = false, $timeout = 10, $postHttpHeader = null) {
+  protected function sendRequest(string $globalUrl, string $url, bool $postMode, ?array $postData = null, bool $enabledDevMode = false, int $timeout = 10, ?array $postHttpHeader = null): array {
     // on va faire notre check du mode test ici pour faire le mock de l'API
     $environnement = getenv('APP_ENV');
-    if (strcmp($environnement , "test") != 0 && ($enabledDevMode == false || strcmp($environnement , "dev") != 0)) {
+    if ($environnement !== "test" && ($enabledDevMode === false || $environnement !== "dev")) {
       $ch = curl_init();
       if ($postMode) {
         $ch = curl_init($globalUrl);
@@ -49,7 +38,7 @@ class ImanagingApiCommunication
       curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
       
       // Gestion d'un proxy
-      if (getenv('PROXY') == 'true') {
+      if (getenv('PROXY') === 'true') {
         curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, true);
         curl_setopt($ch, CURLOPT_PROXY, getenv('PROXY_URL'));
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
@@ -61,7 +50,7 @@ class ImanagingApiCommunication
         'curl_error' => ''
       );
       $errno = curl_errno($ch);
-      if($errno != 0) {
+      if($errno !== 0) {
         $error_message = curl_strerror($errno);
         $resultRequest['curl_error'] = "cURL error ({$errno}):\n {$error_message}";
       }
@@ -73,14 +62,18 @@ class ImanagingApiCommunication
     return $resultRequest;
   }
 
-  private function getDataFileByParams($url, $postMode, $postData = null) {
+  /**
+   * @param array|null $postData
+   * @return array<string, mixed>
+   */
+  private function getDataFileByParams(string $url, bool $postMode, ?array $postData = null): array {
     if ($postMode) {
       $fileName = md5(json_encode($url) . json_encode($postData));
     } else {
       $fileName = md5(json_encode($url));
     }
 
-    Utils::createRecursiveFolder($this->projectDir, $this->mockDir);
+    Utils::createRecursiveFolder($this->projectDir, (string)$this->mockDir);
     $filePath = $this->projectDir . $this->mockDir . $fileName . ".yaml";
 
     if (file_exists($filePath)) {
@@ -88,12 +81,13 @@ class ImanagingApiCommunication
     } else {
       $data = Yaml::dump(array('http_code' => '200', 'response' => 'default_response | file : ' . $fileName, 'curl_error' => ''));
       file_put_contents($filePath, $data);
+      $data = Yaml::parse($data);
     }
 
-    return $data;
+    return (array)$data;
   }
 
-  public function setTimeout($timeout = 10) {
+  public function setTimeout(int $timeout = 10): void {
     $this->timeout = $timeout;
   }
 }
