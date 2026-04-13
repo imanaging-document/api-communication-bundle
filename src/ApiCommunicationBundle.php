@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Imanaging\ApiCommunicationBundle\DependencyInjection;
+namespace Imanaging\ApiCommunicationBundle;
 
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Imanaging\ApiCommunicationBundle\DependencyInjection\ApiCommunicationExtension;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class ApiCommunicationExtension extends Extension
+class ApiCommunicationBundle extends Bundle
 {
   public function getContainerExtension(): ?ExtensionInterface
   {
