@@ -13,12 +13,12 @@ class RequestResult
   private ?string $globalUrl = null;
 
   /**
-   * @param array|null $postData
+   * @param mixed $postData
    */
   public function __construct(
     private string $url,
     private bool $postMode,
-    private ?array $postData
+    private mixed $postData
   ) {
   }
 
@@ -68,9 +68,9 @@ class RequestResult
   }
 
   /**
-   * @return array|null
+   * @return mixed
    */
-  public function getPostData(): ?array
+  public function getPostData(): mixed
   {
     return $this->postData;
   }

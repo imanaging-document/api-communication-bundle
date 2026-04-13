@@ -22,7 +22,7 @@ class ApiDematCommunication extends ImanagingApiCommunication
     $this->mock_enable_on_dev_env = false;
   }
 
-  public function sendPostRequest(string $url, ?array $postData): RequestResult {
+  public function sendPostRequest(string $url, mixed $postData): RequestResult {
     return $this->sendRequestDemat($url, true, $postData);
   }
 
@@ -30,7 +30,7 @@ class ApiDematCommunication extends ImanagingApiCommunication
     return $this->sendRequestDemat($url, false);
   }
 
-  private function sendRequestDemat(string $url, bool $postMode, ?array $postData = null): RequestResult {
+  private function sendRequestDemat(string $url, bool $postMode, mixed $postData = null): RequestResult {
     $requestResult = new RequestResult($url, $postMode, $postData);
 
     // si pas d'erreur, on continue

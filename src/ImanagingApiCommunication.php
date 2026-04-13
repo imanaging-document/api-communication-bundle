@@ -12,11 +12,11 @@ class ImanagingApiCommunication
   protected int $timeout = 10;
 
   /**
-   * @param array|null $postData
+   * @param mixed $postData
    * @param array|null $postHttpHeader
    * @return array<string, mixed>
    */
-  protected function sendRequest(string $globalUrl, string $url, bool $postMode, ?array $postData = null, bool $enabledDevMode = false, int $timeout = 10, ?array $postHttpHeader = null): array {
+  protected function sendRequest(string $globalUrl, string $url, bool $postMode, mixed $postData = null, bool $enabledDevMode = false, int $timeout = 10, ?array $postHttpHeader = null): array {
     // on va faire notre check du mode test ici pour faire le mock de l'API
     $environnement = getenv('APP_ENV');
     if ($environnement !== "test" && ($enabledDevMode === false || $environnement !== "dev")) {
@@ -64,10 +64,10 @@ class ImanagingApiCommunication
   }
 
   /**
-   * @param array|null $postData
+   * @param mixed $postData
    * @return array<string, mixed>
    */
-  private function getDataFileByParams(string $url, bool $postMode, ?array $postData = null): array {
+  private function getDataFileByParams(string $url, bool $postMode, mixed $postData = null): array {
     if ($postMode) {
       $fileName = md5(json_encode($url) . json_encode($postData));
     } else {

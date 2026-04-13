@@ -23,7 +23,7 @@ class ApiCustomCommunication extends ImanagingApiCommunication
     $this->mock_enable_on_dev_env = false;
   }
 
-  public function sendPostRequest(string $url, ?array $postData): RequestResult {
+  public function sendPostRequest(string $url, mixed $postData): RequestResult {
       return $this->sendRequestCustom($url, true, $postData);
   }
 
@@ -31,7 +31,7 @@ class ApiCustomCommunication extends ImanagingApiCommunication
     return $this->sendRequestCustom($url, false);
   }
 
-  private function sendRequestCustom(string $url, bool $postMode, ?array $postData = null): RequestResult {
+  private function sendRequestCustom(string $url, bool $postMode, mixed $postData = null): RequestResult {
     $requestResult = new RequestResult($url, $postMode, $postData);
 
     // si pas d'erreur, on continue

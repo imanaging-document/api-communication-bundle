@@ -26,7 +26,7 @@ class ApiZeusCommunication extends ImanagingApiCommunication
     $this->mock_enable_on_dev_env = false;
   }
 
-  public function sendPostRequest(string $url, ?array $postData): RequestResult {
+  public function sendPostRequest(string $url, mixed $postData): RequestResult {
     return $this->sendRequestZeus($url, true, $postData);
   }
 
@@ -34,7 +34,7 @@ class ApiZeusCommunication extends ImanagingApiCommunication
     return $this->sendRequestZeus($url, false);
   }
 
-  private function sendRequestZeus(string $url, bool $postMode, ?array $postData = null): RequestResult {
+  private function sendRequestZeus(string $url, bool $postMode, mixed $postData = null): RequestResult {
     $requestResult = new RequestResult($url, $postMode, $postData);
 
     // si pas d'erreur, on continue

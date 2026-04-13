@@ -27,7 +27,7 @@ class ApiCoreCommunication extends ImanagingApiCommunication
     $this->mock_enable_on_dev_env = false;
   }
 
-  public function sendPostRequest(string $url, ?array $postData): RequestResult {
+  public function sendPostRequest(string $url, mixed $postData): RequestResult {
     return $this->sendRequestCore($url, true, $postData);
   }
 
@@ -35,7 +35,7 @@ class ApiCoreCommunication extends ImanagingApiCommunication
     return $this->sendRequestCore($url, false);
   }
 
-  private function sendRequestCore(string $url, bool $postMode, ?array $postData = null): RequestResult {
+  private function sendRequestCore(string $url, bool $postMode, mixed $postData = null): RequestResult {
     $requestResult = new RequestResult($url, $postMode, $postData);
 
     // si pas d'erreur, on continue
