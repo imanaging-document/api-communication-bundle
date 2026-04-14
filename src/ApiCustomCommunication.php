@@ -43,7 +43,7 @@ class ApiCustomCommunication extends ImanagingApiCommunication
 
       $result = $this->sendRequest($globalUrl, $url, $postMode, $postData, $this->mock_enable_on_dev_env, $this->timeout);
 
-      $requestResult->setHttpCode((string)$result['http_code']);
+      $requestResult->setHttpCode((int)$result['http_code']);
       $requestResult->setData((string)$result['response']);
       if ($result['curl_error'] != '') {
         $requestResult->setError(true);

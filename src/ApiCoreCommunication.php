@@ -47,7 +47,7 @@ class ApiCoreCommunication extends ImanagingApiCommunication
 
       $result = $this->sendRequest($globalUrl, $url, $postMode, $postData, $this->mock_enable_on_dev_env, $this->timeout);
 
-      $requestResult->setHttpCode((string)$result['http_code']);
+      $requestResult->setHttpCode((int)$result['http_code']);
       $requestResult->setData((string)$result['response']);
     }
 
@@ -117,7 +117,7 @@ class ApiCoreCommunication extends ImanagingApiCommunication
     }
 
     $response = $this->sendGetRequest($url);
-    if ($response->getHttpCode() == '200') {
+    if ($response->getHttpCode() == 200) {
       $application = json_decode((string)$response->getData());
       $this->api_core_application_id = $application->id;
 

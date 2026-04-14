@@ -6,7 +6,7 @@ namespace Imanaging\ApiCommunicationBundle\Entity;
 
 class RequestResult
 {
-  private ?string $httpCode = null;
+  private ?int $httpCode = null;
   private ?string $data = null;
   private bool $error = false;
   private ?string $libelleError = null;
@@ -22,12 +22,12 @@ class RequestResult
   ) {
   }
 
-  public function getHttpCode(): ?string
+  public function getHttpCode(): ?int
   {
     return $this->httpCode;
   }
 
-  public function setHttpCode(?string $httpCode): void
+  public function setHttpCode(?int $httpCode): void
   {
     $this->httpCode = $httpCode;
   }
